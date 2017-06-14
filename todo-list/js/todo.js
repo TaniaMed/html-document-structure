@@ -8,13 +8,15 @@ Array.from(todoLists).forEach(todoList => {
             if (this.checked) {
                 const done = todoLists.getElementByclassName('done');
                 let node = input.parentNode;
-                node.renove();
-                insertAfter(node, done.children);
+                //node.renove();
+                done.appendChild(node); 
+                //insertAfter(node, done.children);
             } else {
                 const undone = todoLists.getElementByclassName('undone');
                 let node = input.parentNode;
-                node.renove();
-                insertAfter(node, undone.children);
+                //node.renove();
+                undone.appendChild(node); 
+                //insertAfter(node, undone.children);
             }
         });     
 });
