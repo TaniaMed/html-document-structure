@@ -1,22 +1,24 @@
 'use strict';
 
-const todoLists = document.getElementsByClassName('todo-list');
-Array.from(todoLists).forEach(todoList => {
-    const checkbox = todoList.querySelector('input');
-    Array.from(checkbox).forEach(chB =>
-        chB.onchange = function() {
-            if (this.checked) {
-                const done = todoLists.getElementByclassName('done');
-                let node = input.parentNode;
-                //node.renove();
-                done.appendChild(node); 
-                //insertAfter(node, done.children);
+const todoList = document.querySelector('.todo-list');
+const deeds = todoList.getElementsByTagName('label');
+const doneDeed = todoList.querySelector('.done');
+const undoneDeed = todoList.querySelector('.undone');
+
+Array
+    .from(deeds)
+    .forEach(function(deed) {
+        deed.addEventListener('click', function() {
+            let input = deed.firstElementChild;
+            if (input.checked === true) {
+                input.checked = false;
+                undoneDeed.appendChild(deed); 
             } else {
-                const undone = todoLists.getElementByclassName('undone');
-                let node = input.parentNode;
-                //node.renove();
-                undone.appendChild(node); 
-                //insertAfter(node, undone.children);
+                input.checked = true;
+                doneDeed.appendChild(deed); 
             }
-        });     
-});
+        })
+    });
+
+     
+   
