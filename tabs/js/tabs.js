@@ -46,6 +46,6 @@ function selectArticle(tabName) {
 tabsNav.addEventListener('click', function(event) {
   let old = tabsNav.querySelector('.ui-tabs-active');
   old.classList.remove('ui-tabs-active');
-  event.target.classList.add('ui-tabs-active');
+  event.target.parentNode.classList.add('ui-tabs-active');
   selectArticle(event.target.innerHTML);
 });
