@@ -1,39 +1,51 @@
 'use strict';
 
 const tabs = document.getElementById('tabs');
-const tabsContent = documet.getElementsByClassName('tabs-content');
-const tabsNav = documet.getElementsByClassName('tabs-nav'); 
+const tabsContent = document.querySelector('.tabs-content');
+const tabsNav = document.querySelector('.tabs-nav'); 
 
-const articles = tabsContent.children;
+let articles = tabsContent.children;
+console.log(tabsContent.children);
 
-Array.from(articles).forEach(article => {
-    let articlesName = article.getAttribute('data-tab-title');
-    let articlesIcon = article.getAttribute('data-tab-icon');
+articles = Array.from(articles);
+articles.forEach(article => {
+    let articleName = article.getAttribute('data-tab-title');
+    let articleIcon = article.getAttribute('data-tab-icon');
  
     let newArt = tabsNav.firstElementChild.cloneNode(true);
-    tabsNav.appendChild(newArt);
     
-    newArt.textContent = articlesName;
-    newArt.classList.remove('fa');
-    newArt.classList.add(articlesIcon);
-    tabsNav.getElementsByClassName('fa').parentNode.removeChild(tabsNav.getElementsByClassName('fa'));
+    tabsNav.appendChild(newArt);
+       
+    newArt.firstElementChild.textContent = articleName;
+    newArt.firstElementChild.classList.remove('fa');
+    newArt.firstElementChild.classList.add(articleIcon);
+
+    article.classList.add('hidden');
 });
- 
+
+let fa = tabsNav.querySelector('.fa').parentNode;
+fa.parentNode.removeChild(fa);
+
+
 const navBut = tabsNav.children;
-navBut.children.classList.add('hidden');
-tabsNav.firstElementChild.classList.remove('hidden');
+tabsContent.firstElementChild.classList.remove('hidden');
 tabsNav.firstElementChild.classList.add('ui-tabs-active');
 
-Array.from(navBut).forEach(newA => {
-   newA.addEventListener(click, function() {
-       let old = tabsNav.getElementsByClassName('ui-tabs-active');
-       old.classList.add('hidden');
-       old.classList.remove('ui-tabs-active');
-       newA.classList.add('ui-tabs-active');
-   });
+
+function selectArticle(tabName) {
+  articles.forEach(article => {
+    if (!article.classList.contains('hidden')) {
+      article.classList.add('hidden');
+    }
+    if (article.getAttribute('data-tab-title') === tabName) {
+      article.classList.remove('hidden');
+    }
+  });
+}
+
+tabsNav.addEventListener('click', function(event) {
+  let old = tabsNav.querySelector('.ui-tabs-active');
+  old.classList.remove('ui-tabs-active');
+  event.target.classList.add('ui-tabs-active');
+  selectArticle(event.target.innerHTML);
 });
- 
-
-
-
-var attribute = element.getAttribute(attributeName);
